@@ -1,28 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-const Card = ({ shape, color }) => {
-  const renderShape = () => {
-    switch (shape) {
-      case 'circle':
-        return <circle cx="50%" cy="50%" r="40%" fill={color} />;
-      case 'square':
-        return <rect width="80%" height="80%" fill={color} />;
-      case 'triangle':
-        return (
-          <polygon points="50,0 0,100 100,100" fill={color} />
-        );
-      default:
-        return null;
-    }
-  };
+const Card = ({ children, bg = 'bg-gray-100' }) => {
+    return (
+        <div className={`${bg} p-4 rounded-lg shadow-lg flex justify-center items-center`}>
+            { children }
+        </div>
+    )
+}
 
-  return (
-    <div>
-      <svg width="100" height="100">
-        {renderShape()}
-      </svg>
-    </div>
-  );
-};
-
-export default Card;
+export default Card

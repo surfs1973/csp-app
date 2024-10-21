@@ -3,17 +3,17 @@ import React from 'react';
 import Card from './Card';
 
 const CardGrid = () => {
-    const placeholderCards = Array.from({ length: 12 }, (_, index) => ({
-        shape: 'circle',
-        color: index % 2 === 0 ? 'lightblue' : 'lightgreen',
-    }));
-
+    const placeholderCards = ["blue", "red", "green", "yellow"]
     return (
         <>
-            <div className="grid grid-cols-3 gap-4">
-                {placeholderCards.map((card, index) => (
-                    <Card key={index} shape={card.shape} color={card.color} />
-                ))}
+            <div className="relative rounded-xl">
+                <div className="grid grid-cols-3 gap-4 rounded-lg block">
+                    {placeholderCards.map(() => (
+                        <Card>
+                            <h1>Hello world</h1>
+                        </Card>
+                    ))}
+                </div>
             </div>
         </>
     );
