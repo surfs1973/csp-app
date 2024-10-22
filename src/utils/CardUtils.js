@@ -31,15 +31,16 @@ export const shuffleDeck = (deck) => {
 
 // check if 3 cards form a set
 export const isSet = (cards) => {
-    // const matchDiff = (x) => {
-    //     const val1 = cards[0][x];
-    //     const val2 = cards[1][x];
-    //     const val3 = cards[2][x];
+    const matchDiff = (x) => {
+        const val1 = cards[0][x];
+        const val2 = cards[1][x];
+        const val3 = cards[2][x];
 
-    //     return (val1 === val2 && val2 === val3) || (val1 !== val2 && val1 !== val3 && val2 !== val3);
-    // };
+        return (val1 === val2 && val2 === val3) || (val1 !== val2 && val1 !== val3 && val2 !== val3);
+    };
 
-    return ['shape', 'color', 'shading', 'number'].every(matchDiff);
+    return [''].every(matchDiff);
+    // return ['shape', 'color', 'shading', 'number'].every(matchDiff);
 };
 
 // check for valid set in array
