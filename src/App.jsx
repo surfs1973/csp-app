@@ -5,9 +5,9 @@ import Scoreboard from './components/Scoreboard'
 import MainLayout from './layouts/MainLayout'
 import { generateDeck, shuffleDeck, isSet } from './utils/CardUtils'
 
+const deck = shuffleDeck(generateDeck());
+
 const App = () => {
-    // generate and shuffle deck
-    const deck = shuffleDeck(generateDeck());
     
     return (
         <>

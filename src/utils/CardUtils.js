@@ -30,14 +30,30 @@ export const shuffleDeck = (deck) => {
 };
 
 // check if 3 cards form a set
-export const isSet = (card1, card2, card3) => {
-    const matchDiff = (x) => {
-        const val1 = card1[x];
-        const val2 = card2[x];
-        const val3 = card3[x];
+export const isSet = (cards) => {
+    // const matchDiff = (x) => {
+    //     const val1 = cards[0][x];
+    //     const val2 = cards[1][x];
+    //     const val3 = cards[2][x];
 
-        return (val1 === val2 && val2 === val3) || (val1 !== val2 && val1 !== val3 && val2 !== val3);
-    };
+    //     return (val1 === val2 && val2 === val3) || (val1 !== val2 && val1 !== val3 && val2 !== val3);
+    // };
+
     return ['shape', 'color', 'shading', 'number'].every(matchDiff);
 };
 
+// check for valid set in array
+export const hasValidSet = (cards) => {
+    const n = cards.length;
+    for (let i = 0; i < n - 2; i++) {
+        for (let j = i + 1; j < n - 1; j++) {
+            for (let k = j + 1; k < n; k++) {
+                const potentialSet = [cards[i], cards[j], cards[k]];
+                if (isSet(potentialSet)) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+};
