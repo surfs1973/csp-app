@@ -54,16 +54,16 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
     };
 
     return (
-        <div className="p-4 flex flex-col gap-4 overflow-y-auto max-h-screen">
-            <div className="flex-grow grid grid-cols-3 gap-4">
+        <div className="col-span-2 bg-white p-4 flex flex-col gap-4 order-2">
+            <div className="grid grid-cols-3 gap-4">
                 {displayedCards.map((card, index) => (
                     <button
                         key={index}
                         onClick={() => selectClick(card)}
                         className={
                             `bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 
-                    rounded shadow 
-                    ${activeButtons.includes(card) ? 'ring' : ''}`
+                            rounded shadow h-24
+                            ${activeButtons.includes(card) ? 'ring' : ''}`
                         }
                     >
                         {card.shape} {card.color} {card.shading} {card.number}
@@ -71,7 +71,12 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
                 ))}
             </div>
             <div className="text-center">
-                {`Remaining cards: ${remainingDeck.length}`}
+                <p className="font-medium">
+                    {`Remaining cards: `}
+                    <b>
+                        {remainingDeck.length}
+                    </b>
+                </p>
             </div>
         </div>
     );

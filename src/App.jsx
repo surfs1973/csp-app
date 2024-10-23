@@ -19,22 +19,20 @@ const App = () => {
     };
 
     return (
-        <>
+        <div>
             <MainLayout />
-            <div className="flex h-screen">
+            <div className="h-screen grid grid-cols-1 gap-3 md:grid-cols-4">
                 {/* left panel */}
                 <SetsPanel foundSets={foundSets} />
 
                 {/* center panel */}
-                <div className="p-4 bg-white">
-                    <ButtonGrid deck={deck} firstCards={firstCards} onFoundSet={handleFoundSet} />
-                </div>
+                <ButtonGrid deck={deck} firstCards={firstCards} onFoundSet={handleFoundSet} />
 
                 {/* right panel */}
                 <Scoreboard />
             </div>
 
-        </>
+        </div>
     )
 }
 
