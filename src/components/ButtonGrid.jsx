@@ -54,8 +54,8 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
     };
 
     return (
-        <div className="col-span-2 bg-white p-4 flex flex-col gap-4 order-2">
-            <div className="grid grid-cols-3 gap-4">
+        <div className="col-span-2 bg-white p-4 gap-4 order-2 rounded-lg shadow-2xl">
+            <div className="grid grid-cols-3 gap-4 p-6">
                 {displayedCards.map((card, index) => (
                     <button
                         key={index}

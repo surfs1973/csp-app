@@ -3,6 +3,7 @@ import ButtonGrid from './components/ButtonGrid'
 import SetsPanel from './components/SetsPanel'
 import Scoreboard from './components/Scoreboard'
 import MainLayout from './layouts/MainLayout'
+import Hero from './components/Hero'
 import { generateDeck, shuffleDeck, hasValidSet } from './utils/CardUtils'
 
 const deck = shuffleDeck(generateDeck());
@@ -19,9 +20,10 @@ const App = () => {
     };
 
     return (
-        <div>
+        <div className="bg-gray-100 min-h-screen">
             <MainLayout />
-            <div className="h-screen grid grid-cols-1 gap-3 md:grid-cols-4">
+            <Hero />
+            <div className="px-6 py-6 grid grid-cols-1 gap-8 md:grid-cols-4">
                 {/* left panel */}
                 <SetsPanel foundSets={foundSets} />
 
