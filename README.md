@@ -1,3 +1,5 @@
-# React + Vite
+# CSP App
 
-CSP App for Sets & Graph Coloring
+### Constraint Satisfaction Problem Application
+- Sets & Graph Coloring
+- Built using React + Vite
