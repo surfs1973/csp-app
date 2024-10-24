@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react'
 import ButtonGrid from './components/ButtonGrid'
 import SetsPanel from './components/SetsPanel'
 import Scoreboard from './components/Scoreboard'
-import MainLayout from './layouts/MainLayout'
+import MainLayout from './utils/Shapes'
 import Hero from './components/Hero'
 import { generateDeck, shuffleDeck, hasValidSet } from './utils/CardUtils'
 
@@ -21,17 +21,16 @@ const App = () => {
 
     return (
         <div className="bg-gray-100 min-h-screen">
-            <MainLayout />
             <Hero />
-            <div className="px-6 py-6 grid grid-cols-1 gap-8 md:grid-cols-4">
+            <div className="px-6 py-6 grid grid-cols-1 gap-8 lg:grid-cols-4">
                 {/* left panel */}
-                <SetsPanel foundSets={foundSets} />
+                <SetsPanel foundSets={ foundSets } />
 
                 {/* center panel */}
-                <ButtonGrid deck={deck} firstCards={firstCards} onFoundSet={handleFoundSet} />
+                <ButtonGrid deck={ deck } firstCards={ firstCards } onFoundSet={ handleFoundSet } />
 
                 {/* right panel */}
-                <Scoreboard />
+                <Scoreboard score={ 1234 }/>
             </div>
 
         </div>

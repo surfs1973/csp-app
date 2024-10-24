@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { hasValidSet, isSet } from '../utils/CardUtils';
+import Shapes from '../utils/Shapes';
 
 const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
     const [activeButtons, setActiveButtons] = useState([]);
@@ -26,6 +27,7 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
             if (isSet(activeButtons)) {
                 onFoundSet([...activeButtons]);
                 console.log("This is a set");
+                console.log(activeButtons);
                 replaceCards(indices);
             } else {
                 console.log("This is not a set");
@@ -36,19 +38,29 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
 
     const replaceCards = (indices) => {
         let newDisplayedCards = [...displayedCards];
-        let newCards = remainingDeck.splice(0, 3);
-        indices.forEach((index, idx) => {
-            newDisplayedCards[index] = newCards[idx];
-        });
-        while (!hasValidSet(newDisplayedCards)) {
-            if (remainingDeck.length === 0) {
-                // end of game (we can do a popup here to a navigate or something)
-                console.log("End of game");
-                break;
+        if (remainingDeck.length === 0) {
+            // remove the cards from the screen
+            indices.sort((a, b) => b - a);
+            indices.forEach(index => {
+                newDisplayedCards.splice(index, 1);
+            });
+        } else {
+            // replace the cards on the screen
+            let newCards = remainingDeck.splice(0, 3);
+            indices.forEach((index, idx) => {
+                newDisplayedCards[index] = newCards[idx];
+            });
+            // keep adding cards until there is a valid set or there are no more remaining cards
+            while (!hasValidSet(newDisplayedCards) && remainingDeck.length > 0) {
+                const addCards = remainingDeck.splice(0, 3);
+                newDisplayedCards = [...newDisplayedCards, addCards];
             }
-            const addCards = remainingDeck.splice(0, 3);
-            newDisplayedCards = [...newDisplayedCards, addCards];
         }
+        // check if there is a valid set available
+        if (!hasValidSet(newDisplayedCards)) {
+            console.log("end of game")
+        }
+
         setDisplayedCards(newDisplayedCards);
         setRemainingDeck(remainingDeck);
     };
@@ -61,12 +73,12 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
                         key={index}
                         onClick={() => selectClick(card)}
                         className={
-                            `bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 
-                            rounded shadow h-24
-                            ${activeButtons.includes(card) ? 'ring' : ''}`
+                            `bg-white hover:shadow-xl hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 
+                            rounded shadow h-36  flex items-center justify-center
+                            ${activeButtons.includes(card) ? 'ring ring-indigo-200' : ''}`
                         }
                     >
-                        {card.shape} {card.color} {card.shading} {card.number}
+                        <Shapes color={card.color} shape={card.shape} shading={card.shading} number={card.number}/>
                     </button>
                 ))}
             </div>

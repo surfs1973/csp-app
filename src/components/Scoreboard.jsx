@@ -14,14 +14,14 @@ const Scoreboard = ({ score }) => {
     const seconds = Math.floor((time % 6000) / 100);
 
     return (
-        <div className="col-span-1 p-4 flex items-center justify-center order-1 md:order-3">
+        <div className="col-span-1 flex items-center justify-center order-1 lg:order-3">
             {/* centered card here */}
-            <div className="bg-white py-6 px-16 rounded-lg shadow-2xl text-center">
-                <h1 className="text-4xl">
+            <div className="bg-white py-8 px-16 rounded-lg shadow-2xl text-center">
+                <h1 className="text-4xl mb-2">
                     {hours}:{minutes.toString().padStart(2, "0")}:
                     {seconds.toString().padStart(2, "0")}
                 </h1>
-                <h1>{`Score ${ score }`}</h1>
+                <h1><b>Score: </b>{`${ score }`}</h1>
             </div>
         </div>
     );

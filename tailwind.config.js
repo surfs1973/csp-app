@@ -11,6 +11,12 @@ export default {
       },
       gridTemplateColumns: {
         '70/30': '70% 28%'
+      },
+      maxHeight: {
+        '128': '36rem'
+      },
+      scale: {
+        '25': '0.25',
       }
     },
   },

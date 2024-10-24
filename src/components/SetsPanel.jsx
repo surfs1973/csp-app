@@ -2,13 +2,13 @@ import React from 'react'
 
 const SetsPanel = ({ foundSets }) => {
     return (
-        <div className="col-span-1 flex order-3 bg-white p-6 rounded-lg shadow-2xl md:order-1">
-            <h1 className="text-xl font-bold mb-2 text-center">Sets Found</h1>
-            <div className="overflow-y-auto rounded-lg bg-gray-100 shaddow-inner">
+        <div className="order-3 bg-white p-6 rounded-lg shadow-2xl lg:order-1">
+            <h1 className="text-xl pb-4 text-center">Sets Found</h1>
+            <div className="overflow-y-auto max-h-128 bg-gray-100 shadow-inner mx-4 p-4 rounded-lg">
                 {foundSets.map((sets, index) => (
-                    <div key={index} className="bg-white m-6 p-6 rounded-lg shadow-md">
+                    <div key={index} className="bg-white mx-4 my-4 p-2 rounded-lg shadow-md hover:shadow-lg">
                         {sets.map((card, cardIndex) => (
-                            <p key={cardIndex} className="mt-1 mb-1 text-center text-xs">
+                            <p key={cardIndex} className="my-1 text-center text-xs">
                                 {card.shape} {card.color} {card.shading} {card.number}
                             </p>
                         ))}

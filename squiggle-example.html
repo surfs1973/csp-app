@@ -1,0 +1,18 @@
+<svg width="400" height="400" style="border: 1px solid black;">
+    <defs>
+        <path id="squiggle"
+            d="m67.892902,12.746785c43.231313,-6.717223 107.352741,6.609823 121.028973,58.746408c13.676233,52.136585 -44.848649,161.467192 -45.07116,204.650732c4.566246,56.959708 83.805481,87.929227 22.329944,105.806022c-61.475536,17.876795 -126.122496,-1.855045 -143.73294,-41.933823c-17.610444,-40.07878 49.274638,-120.109409 46.14822,-188.091997c-3.126418,-67.982588 -21.873669,-70.257464 -49.613153,-80.177084c-27.739485,-9.919618 5.678801,-52.283035 48.910115,-59.000258z">
+        </path>
+        <pattern id="pattern-stripe" width="10" height="10" patternUnits="userSpaceOnUse">
+            <rect width="10" height="5" fill="#fff"></rect>
+        </pattern>
+        <mask id="mask-stripe">
+            <rect x="0" y="0" width="400" height="400" fill="url(#pattern-stripe)"></rect>
+        </mask>
+    </defs>
+
+    <!-- Step 2: Draw the Squiggle for the Fill with Mask -->
+    <use href="#squiggle" fill="blue" mask="url(#mask-stripe)" transform="translate(50, 50)" />
+  <!-- Step 1: Draw the Squiggle for the Stroke -->
+    <use href="#squiggle" fill="none" stroke="blue" stroke-width="8" transform="translate(50, 50)" />
+</svg>
