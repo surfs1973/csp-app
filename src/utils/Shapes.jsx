@@ -1,9 +1,9 @@
 import React from 'react'
 
 // use this class and pass in args to build the shape
-const Shapes = ({ color, shading, shape, number, scale }) => {
+const Shapes = ({ color, shading, shape, number, classes }) => {
     return (
-        <svg width="200" height="400" className="h-12 sm:h-20 md:h-24 lg:h-12 xl:h-20 2xl:h-24" viewBox="0 0 210 420">
+        <svg width="200" height="400" className={ classes } viewBox="0 0 210 420">
             <defs>
                 <path id="squiggle"
                     d="m67.892902,12.746785c43.231313,-6.717223 107.352741,6.609823 121.028973,58.746408c13.676233,52.136585 -44.848649,161.467192 -45.07116,204.650732c4.566246,56.959708 83.805481,87.929227 22.329944,105.806022c-61.475536,17.876795 -126.122496,-1.855045 -143.73294,-41.933823c-17.610444,-40.07878 49.274638,-120.109409 46.14822,-188.091997c-3.126418,-67.982588 -21.873669,-70.257464 -49.613153,-80.177084c-27.739485,-9.919618 5.678801,-52.283035 48.910115,-59.000258z">

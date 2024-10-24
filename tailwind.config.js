@@ -17,6 +17,9 @@ export default {
       },
       scale: {
         '25': '0.25',
+      },
+      screens: {
+        'xxl': '1520px',
       }
     },
   },

@@ -14,7 +14,7 @@ const Scoreboard = ({ score }) => {
     const seconds = Math.floor((time % 6000) / 100);
 
     return (
-        <div className="col-span-1 flex items-center justify-center order-1 lg:order-3">
+        <div className="col-span-1 flex items-center justify-center order-1 xl:order-3 lg:col-span-4 xl:col-span-1">
             {/* centered card here */}
             <div className="bg-white py-8 px-16 rounded-lg shadow-2xl text-center">
                 <h1 className="text-4xl mb-2">

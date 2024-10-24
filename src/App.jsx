@@ -1,8 +1,7 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState } from 'react'
 import ButtonGrid from './components/ButtonGrid'
 import SetsPanel from './components/SetsPanel'
 import Scoreboard from './components/Scoreboard'
-import MainLayout from './utils/Shapes'
 import Hero from './components/Hero'
 import { generateDeck, shuffleDeck, hasValidSet } from './utils/CardUtils'
 
@@ -24,15 +23,14 @@ const App = () => {
             <Hero />
             <div className="px-6 py-6 grid grid-cols-1 gap-8 lg:grid-cols-4">
                 {/* left panel */}
-                <SetsPanel foundSets={ foundSets } />
+                <SetsPanel foundSets={foundSets} />
 
                 {/* center panel */}
-                <ButtonGrid deck={ deck } firstCards={ firstCards } onFoundSet={ handleFoundSet } />
+                <ButtonGrid deck={deck} firstCards={firstCards} onFoundSet={handleFoundSet} />
 
                 {/* right panel */}
-                <Scoreboard score={ 1234 }/>
+                <Scoreboard score={foundSets.length} />
             </div>
-
         </div>
     )
 }

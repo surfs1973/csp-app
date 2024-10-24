@@ -1,23 +1,30 @@
-import React from 'react'
+import React from 'react';
 
 const Hero = () => {
+    const onHomeClick = (event) => {
+        event.preventDefault();
+        const confirm = window.confirm('Are you sure you want to restart the game?');
+        if (!confirm) return;
+        window.location.reload();
+    }
+
     return (
         <>
             <section className="bg-indigo-700 py-3">
-                <div
-                    className="mx-auto px-4 flex flex-col"
-                >
+                <div className="mx-auto px-4 flex flex-col">
                     <div>
-                        <h1
+                        <a
+                            href="/"
                             className="text-2xl text-white"
+                            onClick={onHomeClick}
                         >
                             Set Game
-                        </h1>
+                        </a>
                     </div>
                 </div>
             </section>
         </>
-    )
+    );
 }
 
-export default Hero
+export default Hero;

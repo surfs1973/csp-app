@@ -74,11 +74,11 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
                         onClick={() => selectClick(card)}
                         className={
                             `bg-white hover:shadow-xl hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 
-                            rounded shadow h-36  flex items-center justify-center
+                            rounded shadow flex items-center justify-center
                             ${activeButtons.includes(card) ? 'ring ring-indigo-200' : ''}`
                         }
                     >
-                        <Shapes color={card.color} shape={card.shape} shading={card.shading} number={card.number}/>
+                        <Shapes color={card.color} shape={card.shape} shading={card.shading} number={card.number} classes="h-12 sm:h-20 md:h-24 lg:h-16 xl:h-20 2xl:h-24"/>
                     </button>
                 ))}
             </div>
