@@ -2,11 +2,18 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { hasValidSet, isSet } from '../utils/CardUtils';
 import Shapes from '../utils/Shapes';
+import { toast } from 'react-toastify'
 
 const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
     const [activeButtons, setActiveButtons] = useState([]);
     const [displayedCards, setDisplayedCards] = useState(firstCards);
     const [remainingDeck, setRemainingDeck] = useState(deck);
+
+    useEffect(() => {
+        setDisplayedCards(firstCards);
+        setRemainingDeck(deck);
+        setActiveButtons([]);
+    }, [firstCards, deck]);
 
     const selectClick = (card) => {
         if (activeButtons.includes(card)) {
@@ -26,10 +33,10 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
 
             if (isSet(activeButtons)) {
                 onFoundSet([...activeButtons]);
-                console.log("This is a set");
+                toast.success('Set found');
                 replaceCards(indices);
             } else {
-                console.log("This is not a set");
+                toast.error('This is not a set');
             }
             setActiveButtons([]);
         }
@@ -77,7 +84,7 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
                             ${activeButtons.includes(card) ? 'ring ring-indigo-200' : ''}`
                         }
                     >
-                        <Shapes color={card.color} shape={card.shape} shading={card.shading} number={card.number} classes="h-12 sm:h-20 md:h-24 lg:h-16 xl:h-20 2xl:h-24"/>
+                        <Shapes color={card.color} shape={card.shape} shading={card.shading} number={card.number} classes="h-12 sm:h-20 md:h-24 lg:h-16 xl:h-20 2xl:h-24" />
                     </button>
                 ))}
             </div>

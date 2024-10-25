@@ -6,8 +6,7 @@
 
 ### To Do
 1. Set
-    - Add new game option
-    - Add end of game screen
-    - Add not a set/found a set toast
+    - Add new game and back options below scoreboard
+    - Move modal to button grid for end of game
 2. Accounts
     - Save state

@@ -29,6 +29,16 @@ export const shuffleDeck = (deck) => {
     return deck;
 };
 
+// build initial game stuff
+export const initCards = () => {
+    let deck = shuffleDeck(generateDeck());
+    while (!hasValidSet(deck.slice(0, 12))) {
+        deck = shuffleDeck(deck);
+    }
+    const firstCards = shuffleDeck(deck.splice(0, 12));
+    return { deck, firstCards };
+};
+
 // check if 3 cards form a set
 export const isSet = (cards) => {
     const matchDiff = (x) => {
@@ -39,7 +49,7 @@ export const isSet = (cards) => {
         return (val1 === val2 && val2 === val3) || (val1 !== val2 && val1 !== val3 && val2 !== val3);
     };
 
-    return [''].every(matchDiff);
+    return ['color'].every(matchDiff);
     // return ['shape', 'color', 'shading', 'number'].every(matchDiff);
 };
 

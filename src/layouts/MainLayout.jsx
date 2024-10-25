@@ -4,12 +4,12 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Navbar from '../components/Navbar'
 
-const MainLayout = () => {
+const MainLayout = () => {    
     return (
         <>
             <Navbar />
+            <ToastContainer stacked autoClose={2000} position="bottom-center" />
             <Outlet />
-            <ToastContainer />
         </>
     )
 }
