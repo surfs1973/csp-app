@@ -1,11 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Hero = () => {
+const Navbar = () => {
+    const navigate = useNavigate();
+
     const onHomeClick = (event) => {
         event.preventDefault();
-        const confirm = window.confirm('Are you sure you want to restart the game?');
-        if (!confirm) return;
-        window.location.reload();
+        return navigate("/")
     }
 
     return (
@@ -18,7 +19,7 @@ const Hero = () => {
                             className="text-2xl text-white"
                             onClick={onHomeClick}
                         >
-                            Set Game
+                            Constraint Satisfaction Problems
                         </a>
                     </div>
                 </div>
@@ -27,4 +28,4 @@ const Hero = () => {
     );
 }
 
-export default Hero;
+export default Navbar;

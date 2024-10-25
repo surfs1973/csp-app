@@ -7,12 +7,9 @@ const SetsPanel = ({ foundSets }) => {
             <h1 className="text-xl pb-4 text-center">Sets Found</h1>
             <div className="overflow-y-auto max-h-128 bg-gray-100 shadow-inner mx-2 rounded-lg">
                 {foundSets.map((sets, index) => (
-                    // bg-white py-2 px-4 border border-gray-400 
-                    // rounded shadow h-36  flex items-center justify-center
                     <div key={index} className="flex items-center justify-center bg-white mx-4 my-4 p-3 rounded-lg shadow-md hover:shadow-lg">
                         {sets.map((card) => (
-                            // <p key={card.key}>{card.key}</p>
-                        <Shapes key={card.key} color={card.color} shape={card.shape} shading={card.shading} number={card.number} classes="border border-black mx-1 p-2 h-16 xxl:h-12 xl:h-8"/>
+                            <Shapes key={card.key} color={card.color} shape={card.shape} shading={card.shading} number={card.number} classes="border border-black mx-1 p-2 h-16 xxl:h-12 xl:h-8"/>
                         ))}
                     </div>
                 ))}

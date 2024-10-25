@@ -27,7 +27,6 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
             if (isSet(activeButtons)) {
                 onFoundSet([...activeButtons]);
                 console.log("This is a set");
-                console.log(activeButtons);
                 replaceCards(indices);
             } else {
                 console.log("This is not a set");
