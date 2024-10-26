@@ -5,8 +5,8 @@
 - Built using React + Vite
 
 ### To Do
-1. Set
-    - Add new game and back options below scoreboard
-    - Move modal to button grid for end of game
-2. Accounts
-    - Save state
+1. Accounts
+    - Save state via login
+    - Profile page
+2. Graph Coloring
+    - Implement visual
