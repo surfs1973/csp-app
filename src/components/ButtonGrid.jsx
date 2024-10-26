@@ -4,11 +4,11 @@ import { hasValidSet, isSet } from '../utils/CardUtils';
 import Shapes from '../utils/Shapes';
 import { toast } from 'react-toastify'
 
-const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
+const ButtonGrid = ({ deck, firstCards, onFoundSet, setOpenGameEnd }) => {
     const [activeButtons, setActiveButtons] = useState([]);
     const [displayedCards, setDisplayedCards] = useState(firstCards);
     const [remainingDeck, setRemainingDeck] = useState(deck);
-
+    
     useEffect(() => {
         setDisplayedCards(firstCards);
         setRemainingDeck(deck);
@@ -64,7 +64,8 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet }) => {
         }
         // check if there is a valid set available
         if (!hasValidSet(newDisplayedCards)) {
-            console.log("end of game")
+            // end of game
+            setOpenGameEnd(true);
         }
 
         setDisplayedCards(newDisplayedCards);

@@ -2,8 +2,10 @@ import { React, useState, useEffect } from 'react'
 import ButtonGrid from '../components/ButtonGrid'
 import SetsPanel from '../components/SetsPanel'
 import Scoreboard from '../components/Scoreboard'
-import Modal from '../components/Modal'
 import { initCards } from '../utils/CardUtils'
+
+import GameEndModal from '../components/modals/GameEndModal'
+import NewGameModal from '../components/modals/NewGameModal'
 
 const SetPage = () => {
     const [gameState, setGameState] = useState(initCards());
@@ -12,20 +14,22 @@ const SetPage = () => {
         setFoundSets((prevSets) => [...prevSets, newSet]);
     };
 
-    const [open, setOpen] = useState(false);
+    const [openNewGame, setOpenNewGame] = useState(false);
+    const [openGameEnd, setOpenGameEnd] = useState(false);
+
     const [time, setTime] = useState(0);
 
     const startNewGame = () => {
         setGameState(initCards());
         setFoundSets([]);
         setTime(0);
-        setOpen(false);
+        setOpenNewGame(false);
+        setOpenGameEnd(false);
     };
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            setTime((prev) => prev + 1);
-        }, 10);
+        let intervalId;
+        intervalId = setInterval(() => setTime(time + 1), 10);
         return () => clearInterval(intervalId);
     }, [time]);
 
@@ -36,15 +40,12 @@ const SetPage = () => {
                 <SetsPanel foundSets={foundSets} />
 
                 {/* center panel */}
-                <ButtonGrid deck={gameState.deck} firstCards={gameState.firstCards} onFoundSet={handleFoundSet} />
+                <ButtonGrid deck={gameState.deck} firstCards={gameState.firstCards} onFoundSet={handleFoundSet} setOpenGameEnd={setOpenGameEnd} />
 
                 {/* right panel */}
-                <Scoreboard score={foundSets.length} time={time} />
-                <button onClick={() => setOpen(true)} className="bg-blue-700 text-white rounded-lg px-4 py-2 hover:bg-blue-800">
-                    Toggle Modal
-                </button>
-
-                <Modal open={open} setOpen={setOpen} onStartNewGame={startNewGame} />
+                <Scoreboard score={foundSets.length} time={time} setOpenNewGame={setOpenNewGame}/>
+                <NewGameModal open={openNewGame} setOpen={setOpenNewGame} onStartNewGame={startNewGame} />
+                <GameEndModal open={openGameEnd} setOpen={setOpenGameEnd} onStartNewGame={startNewGame} />
             </div>
         </div>
     )
