@@ -1,4 +1,6 @@
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
+import { initializeApp } from 'firebase/app'
+import { getAuth } from "firebase/auth";
 import React from 'react'
 import HomePage from './pages/HomePage'
 import MainLayout from './layouts/MainLayout'
