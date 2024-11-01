@@ -59,7 +59,7 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet, setOpenGameEnd }) => {
             // keep adding cards until there is a valid set or there are no more remaining cards
             while (!hasValidSet(newDisplayedCards) && remainingDeck.length > 0) {
                 const addCards = remainingDeck.splice(0, 3);
-                newDisplayedCards = [...newDisplayedCards, addCards];
+                newDisplayedCards = [...newDisplayedCards, ...addCards];
             }
         }
         // check if there is a valid set available
@@ -67,7 +67,7 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet, setOpenGameEnd }) => {
             // end of game
             setOpenGameEnd(true);
         }
-        // console.log(findSet(newDisplayedCards));
+        // console.log(findSet(newDisplayedCards)); // debug statement
         setDisplayedCards(newDisplayedCards);
         setRemainingDeck(remainingDeck);
     };
