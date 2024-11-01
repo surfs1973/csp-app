@@ -12,7 +12,7 @@ const Scoreboard = ({ time, score, setOpenNewGame, setOpenGoHome }) => {
     }
 
     return (
-        <div className="col-span-1 m-auto order-1 xl:order-3 lg:col-span-4 xl:col-span-1">
+        <div className="col-span-2 m-auto order-1 xl:order-3 lg:col-span-4 xl:col-span-1">
             {/* centered card here */}
             <div className="grid grid-cols-1 xl:grid-cols-1 md:grid-cols-2">
                 <div className="bg-white py-8 px-16 rounded-lg shadow-2xl text-center">
