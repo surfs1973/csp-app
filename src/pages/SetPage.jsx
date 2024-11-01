@@ -1,47 +1,42 @@
-import { React, useState, useEffect } from 'react'
-import ButtonGrid from '../components/ButtonGrid'
-import SetsPanel from '../components/SetsPanel'
-import Scoreboard from '../components/Scoreboard'
-import { initCards } from '../utils/CardUtils'
+import { React, useState, useEffect } from 'react';
+import ButtonGrid from '../components/ButtonGrid';
+import SetsPanel from '../components/SetsPanel';
+import Scoreboard from '../components/Scoreboard';
+import { initCards, findSet } from '../utils/CardUtils';
 
-import GameEndModal from '../components/modals/GameEndModal'
-import NewGameModal from '../components/modals/NewGameModal'
+import GameEndModal from '../components/modals/GameEndModal';
+import NewGameModal from '../components/modals/NewGameModal';
 import GoHomeModal from "../components/modals/GoHomeModal";
 
 const SetPage = ({ profile, editProfile, foundSets, setFoundSets }) => {
     const [gameState, setGameState] = useState(initCards());
-    const handleFoundSet = (newSet) => {
-        setFoundSets((prevSets) => [...prevSets, newSet]);
-    };
-
+    const [time, setTime] = useState(0);
     const [openNewGame, setOpenNewGame] = useState(false);
     const [openGameEnd, setOpenGameEnd] = useState(false);
     const [openGoHome, setOpenGoHome] = useState(false);
 
-    const [time, setTime] = useState(0);
+    const handleFoundSet = (newSet) => {
+        setFoundSets((prevSets) => [...prevSets, newSet]);
+    };
 
     const updateProfileStats = () => {
         if (foundSets.length > 0) {
-            editProfile(
-                { 
-                    total_games: profile.total_games + 1,
-                    total_sets: profile.total_sets + foundSets.length,
-                    total_time: profile.total_time + time
-                }
-            );
+            editProfile({
+                total_games: profile.total_games + 1,
+                total_sets: profile.total_sets + foundSets.length,
+                total_time: profile.total_time + time
+            });
         }
     };
 
     const updateProfileStatsComplete = () => {
         if (foundSets.length > 0) {
-            editProfile(
-                { 
-                    total_games: profile.total_games + 1,
-                    total_sets: profile.total_sets + foundSets.length,
-                    total_time: profile.total_time + time,
-                    games_completed: profile.games_completed + 1
-                }
-            );
+            editProfile({
+                total_games: profile.total_games + 1,
+                total_sets: profile.total_sets + foundSets.length,
+                total_time: profile.total_time + time,
+                games_completed: profile.games_completed + 1
+            });
         }
     };
 
@@ -63,12 +58,15 @@ const SetPage = ({ profile, editProfile, foundSets, setFoundSets }) => {
         setOpenGameEnd(false);
     };
 
-
     useEffect(() => {
-        let intervalId;
-        intervalId = setInterval(() => setTime(time + 1), 10);
+        let intervalId = setInterval(() => setTime((prevTime) => prevTime + 1), 10);
         return () => clearInterval(intervalId);
-    }, [time]);
+    }, []);
+
+    // debug to show set on screen
+    // useEffect(() => {
+    //     console.log(findSet(gameState.firstCards));
+    // }, [gameState.firstCards]);
 
     return (
         <div>
@@ -84,9 +82,9 @@ const SetPage = ({ profile, editProfile, foundSets, setFoundSets }) => {
                 <NewGameModal open={openNewGame} setOpen={setOpenNewGame} onStartNewGame={startNewGame} />
                 <GameEndModal open={openGameEnd} setOpen={setOpenGameEnd} onStartNewGame={startNewGameCompleted} />
                 <GoHomeModal open={openGoHome} setOpen={setOpenGoHome} onStartNewGame={startNewGame} />
-                </div>
+            </div>
         </div>
-    )
+    );
 }
 
-export default SetPage
+export default SetPage;

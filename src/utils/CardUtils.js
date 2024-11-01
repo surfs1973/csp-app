@@ -68,3 +68,19 @@ export const hasValidSet = (cards) => {
     }
     return false;
 };
+
+// find a set in a deck
+export const findSet = (cards) => {
+    const n = cards.length;
+    for (let i = 0; i < n - 2; i++) {
+        for (let j = i + 1; j < n - 1; j++) {
+            for (let k = j + 1; k < n; k++) {
+                const potentialSet = [cards[i], cards[j], cards[k]];
+                if (isSet(potentialSet)) {
+                    return potentialSet;
+                }
+            }
+        }
+    }
+    return false;
+};

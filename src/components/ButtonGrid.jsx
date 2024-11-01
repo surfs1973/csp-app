@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { hasValidSet, isSet } from '../utils/CardUtils';
+import { findSet, hasValidSet, isSet } from '../utils/CardUtils';
 import Shapes from '../utils/Shapes';
 import { toast } from 'react-toastify'
 
@@ -67,7 +67,7 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet, setOpenGameEnd }) => {
             // end of game
             setOpenGameEnd(true);
         }
-
+        // console.log(findSet(newDisplayedCards));
         setDisplayedCards(newDisplayedCards);
         setRemainingDeck(remainingDeck);
     };
