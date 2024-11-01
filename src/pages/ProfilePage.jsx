@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams, useLoaderData } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { FaArrowLeft, FaMapMarker } from 'react-icons/fa'
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 const ProfilePage = () => {
     const { id } = useParams();
@@ -64,7 +65,7 @@ const ProfilePage = () => {
                                 <h3 className="text-indigo-800 text-lg font-bold mb-2">Total Sets</h3>
                                 <p className="mb-4">{profile.total_sets}</p>
                                 <h3 className="text-indigo-800 text-lg font-bold mb-2">Average Sets Per Game</h3>
-                                <p className="mb-4">{(profile.total_sets/profile.total_games).toFixed(2)}</p>
+                                <p className="mb-4">{(profile.total_sets / profile.total_games).toFixed(2)}</p>
                             </div>
 
                             {/* <!-- Manage --> */}
@@ -85,9 +86,15 @@ const ProfilePage = () => {
 }
 
 const profileLoader = async ({ params }) => {
-    const res = await fetch(`/api/profiles/${params.id}`);
-    const data = await res.json();
-    return data;
+    const db = getFirestore();
+    const userDocRef = doc(db, 'users', params.id);
+    const userDoc = await getDoc(userDocRef);
+
+    if (!userDoc.exists()) {
+        throw new Error('Profile not found');
+    }
+
+    return userDoc.data();
 }
 
 export { ProfilePage as default, profileLoader };

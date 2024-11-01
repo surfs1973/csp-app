@@ -1,26 +1,26 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
-    const navigate = useNavigate();
-
-    const onHomeClick = (event) => {
-        event.preventDefault();
-        return navigate("/")
-    }
-
+const Navbar = ({ user, profile }) => {
     return (
         <>
-            <section className="bg-indigo-700 py-3">
-                <div className="mx-auto px-4 flex flex-col">
-                    <div>
-                        <a
-                            href="/"
-                            className="text-2xl text-white"
-                            onClick={onHomeClick}
+            <section className="bg-indigo-700 p-3">
+                <div className="flex justify-between items-center">
+                    <div className="ml-2">
+                        <Link
+                            to="/"
+                            className="text-xl text-white"
                         >
                             Constraint Satisfaction Problems
-                        </a>
+                        </Link>
+                    </div>
+                    <div className="mr-2">
+                        <Link
+                            to={`/profile/${user.uid}`}
+                            className="text-xl text-white"
+                        >
+                            { profile.name }
+                        </Link>
                     </div>
                 </div>
             </section>

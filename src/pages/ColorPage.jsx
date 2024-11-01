@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { LuConstruction } from "react-icons/lu"
 
-const NotFound = () => {
+const ColorPage = () => {
     return (
         <section className="text-center flex flex-col justify-center items-center h-96">
             <LuConstruction className="text-yellow-400 text-8xl mb-4" />
@@ -17,4 +17,4 @@ const NotFound = () => {
     )
 }
 
-export default NotFound
+export default ColorPage
