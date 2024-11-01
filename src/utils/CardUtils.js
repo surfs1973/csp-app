@@ -49,7 +49,7 @@ export const isSet = (cards) => {
         return (val1 === val2 && val2 === val3) || (val1 !== val2 && val1 !== val3 && val2 !== val3);
     };
 
-    return ['color'].every(matchDiff);
+    return ['shape', 'color', 'shading', 'number'].every(matchDiff);
     // return ['shape', 'color', 'shading', 'number'].every(matchDiff);
 };
 

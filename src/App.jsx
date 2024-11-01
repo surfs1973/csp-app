@@ -40,7 +40,7 @@ const App = () => {
                 <Route path='/set' element={<SetPage profile={profile} editProfile={editProfile} foundSets={foundSets} setFoundSets={setFoundSets} />} />
                 <Route path='/color' element={<ColorPage />} />
                 <Route path='/profile/:id' element={<ProfilePage />} loader={profileLoader} />
-                <Route path='/edit-profile/:id' element={<EditProfilePage editProfileSubmit={editProfile} />} loader={profileLoader} />
+                <Route path='/edit-profile/:id' element={<EditProfilePage setProfile={setProfile} />} loader={profileLoader} />
                 <Route path='*' element={<NotFound />} />
             </Route>
         )
