@@ -4,10 +4,10 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Navbar from '../components/Navbar'
 
-const MainLayout = ({ profile, user }) => {    
+const MainLayout = ({ profile, user, editProfile, foundSets }) => {    
     return (
         <>
-            <Navbar profile={profile} user={user} />
+            <Navbar profile={profile} user={user} editProfile={editProfile} foundSets={foundSets} />
             <ToastContainer stacked autoClose={2000} position="bottom-center" />
             <Outlet />
         </>

@@ -7,6 +7,9 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore';
 const ProfilePage = () => {
     const { id } = useParams();
     const profile = useLoaderData();
+    const hours = Math.floor(profile.total_time / 360000);
+    const minutes = Math.floor((profile.total_time % 360000) / 6000);
+    const seconds = Math.floor((profile.total_time % 6000) / 100);
 
     return (
         <>
@@ -61,9 +64,11 @@ const ProfilePage = () => {
                                 <h3 className="text-xl font-bold mb-6">Statistics</h3>
                                 <hr className="my-4" />
                                 <h3 className="text-indigo-800 text-lg font-bold mb-2">Total Time Played</h3>
-                                <p className="mb-4">{profile.total_time}</p>
+                                <p className="mb-4">{hours}:{minutes.toString().padStart(2, "0")}:{seconds.toString().padStart(2, "0")}</p>
                                 <h3 className="text-indigo-800 text-lg font-bold mb-2">Games Played</h3>
                                 <p className="mb-4">{profile.total_games}</p>
+                                <h3 className="text-indigo-800 text-lg font-bold mb-2">Games Completed</h3>
+                                <p className="mb-4">{profile.games_completed}</p>
                                 <h3 className="text-indigo-800 text-lg font-bold mb-2">Total Sets</h3>
                                 <p className="mb-4">{profile.total_sets}</p>
                                 <h3 className="text-indigo-800 text-lg font-bold mb-2">Average Sets Per Game</h3>

@@ -1,13 +1,7 @@
-import { useState } from "react";
-
-import GoHomeModal from "./modals/GoHomeModal";
-
-const Scoreboard = ({ time, score, setOpenNewGame }) => {
+const Scoreboard = ({ time, score, setOpenNewGame, setOpenGoHome }) => {
     const hours = Math.floor(time / 360000);
     const minutes = Math.floor((time % 360000) / 6000);
     const seconds = Math.floor((time % 6000) / 100);
-
-    const [openGoHome, setOpenGoHome] = useState(false);
 
     const openNewGameModal = () => {
         setOpenNewGame(true);
@@ -37,7 +31,6 @@ const Scoreboard = ({ time, score, setOpenNewGame }) => {
                     </button>
                 </div>
             </div>
-            <GoHomeModal open={openGoHome} setOpen={setOpenGoHome} />
         </div>
     );
 }

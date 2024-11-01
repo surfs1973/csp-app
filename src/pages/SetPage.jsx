@@ -6,26 +6,63 @@ import { initCards } from '../utils/CardUtils'
 
 import GameEndModal from '../components/modals/GameEndModal'
 import NewGameModal from '../components/modals/NewGameModal'
+import GoHomeModal from "../components/modals/GoHomeModal";
 
-const SetPage = ({ profile }) => {
+const SetPage = ({ profile, editProfile, foundSets, setFoundSets }) => {
     const [gameState, setGameState] = useState(initCards());
-    const [foundSets, setFoundSets] = useState([]);
     const handleFoundSet = (newSet) => {
         setFoundSets((prevSets) => [...prevSets, newSet]);
     };
 
     const [openNewGame, setOpenNewGame] = useState(false);
     const [openGameEnd, setOpenGameEnd] = useState(false);
+    const [openGoHome, setOpenGoHome] = useState(false);
 
     const [time, setTime] = useState(0);
+
+    const updateProfileStats = () => {
+        if (foundSets.length > 0) {
+            editProfile(
+                { 
+                    total_games: profile.total_games + 1,
+                    total_sets: profile.total_sets + foundSets.length,
+                    total_time: profile.total_time + time
+                }
+            );
+        }
+    };
+
+    const updateProfileStatsComplete = () => {
+        if (foundSets.length > 0) {
+            editProfile(
+                { 
+                    total_games: profile.total_games + 1,
+                    total_sets: profile.total_sets + foundSets.length,
+                    total_time: profile.total_time + time,
+                    games_completed: profile.games_completed + 1
+                }
+            );
+        }
+    };
 
     const startNewGame = () => {
         setGameState(initCards());
         setFoundSets([]);
         setTime(0);
+        updateProfileStats();
         setOpenNewGame(false);
         setOpenGameEnd(false);
     };
+
+    const startNewGameCompleted = () => {
+        setGameState(initCards());
+        setFoundSets([]);
+        setTime(0);
+        updateProfileStatsComplete();
+        setOpenNewGame(false);
+        setOpenGameEnd(false);
+    };
+
 
     useEffect(() => {
         let intervalId;
@@ -43,10 +80,11 @@ const SetPage = ({ profile }) => {
                 <ButtonGrid deck={gameState.deck} firstCards={gameState.firstCards} onFoundSet={handleFoundSet} setOpenGameEnd={setOpenGameEnd} />
 
                 {/* right panel */}
-                <Scoreboard score={foundSets.length} time={time} setOpenNewGame={setOpenNewGame}/>
+                <Scoreboard score={foundSets.length} time={time} setOpenNewGame={setOpenNewGame} setOpenGoHome={setOpenGoHome} />
                 <NewGameModal open={openNewGame} setOpen={setOpenNewGame} onStartNewGame={startNewGame} />
-                <GameEndModal open={openGameEnd} setOpen={setOpenGameEnd} onStartNewGame={startNewGame} />
-            </div>
+                <GameEndModal open={openGameEnd} setOpen={setOpenGameEnd} onStartNewGame={startNewGameCompleted} />
+                <GoHomeModal open={openGoHome} setOpen={setOpenGoHome} onStartNewGame={startNewGame} />
+                </div>
         </div>
     )
 }

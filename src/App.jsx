@@ -15,6 +15,7 @@ const App = () => {
     const { user, loading, profile, setProfile } = useAuth();
     const db = getFirestore();
     const [isUpdating, setIsUpdating] = useState(false);
+    const [foundSets, setFoundSets] = useState([]);
 
     const editProfile = async (p) => {
         setIsUpdating(true);
@@ -34,9 +35,9 @@ const App = () => {
 
     const router = createBrowserRouter(
         createRoutesFromElements(
-            <Route path='/' element={<MainLayout profile={profile} user={user} />}>
+            <Route path='/' element={<MainLayout profile={profile} user={user} foundSets={foundSets} />}>
                 <Route index element={<HomePage />} />
-                <Route path='/set' element={<SetPage profile={profile} />} />
+                <Route path='/set' element={<SetPage profile={profile} editProfile={editProfile} foundSets={foundSets} setFoundSets={setFoundSets} />} />
                 <Route path='/color' element={<ColorPage />} />
                 <Route path='/profile/:id' element={<ProfilePage />} loader={profileLoader} />
                 <Route path='/edit-profile/:id' element={<EditProfilePage editProfileSubmit={editProfile} />} loader={profileLoader} />
@@ -46,7 +47,7 @@ const App = () => {
     );
 
     if (loading || isUpdating) {
-        return <Spinner text={"Loading..."}/>;
+        return <Spinner text={"Loading..."} />;
     }
 
     return <RouterProvider router={router} />;
