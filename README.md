@@ -6,8 +6,6 @@
 
 ### To Do
 1. Accounts
-    - Save state via login
-    - Create account
-    - Add profile link to home page
+    - Implement profile stats
 2. Graph Coloring
     - Implement visual
