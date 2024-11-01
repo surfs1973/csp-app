@@ -36,7 +36,7 @@ const App = () => {
         createRoutesFromElements(
             <Route path='/' element={<MainLayout profile={profile} user={user} />}>
                 <Route index element={<HomePage />} />
-                <Route path='/set' element={<SetPage />} />
+                <Route path='/set' element={<SetPage profile={profile} />} />
                 <Route path='/color' element={<ColorPage />} />
                 <Route path='/profile/:id' element={<ProfilePage />} loader={profileLoader} />
                 <Route path='/edit-profile/:id' element={<EditProfilePage editProfileSubmit={editProfile} />} loader={profileLoader} />

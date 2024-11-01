@@ -60,12 +60,14 @@ const ProfilePage = () => {
                             <div className="bg-white p-6 rounded-lg shadow-md">
                                 <h3 className="text-xl font-bold mb-6">Statistics</h3>
                                 <hr className="my-4" />
+                                <h3 className="text-indigo-800 text-lg font-bold mb-2">Total Time Played</h3>
+                                <p className="mb-4">{profile.total_time}</p>
                                 <h3 className="text-indigo-800 text-lg font-bold mb-2">Games Played</h3>
                                 <p className="mb-4">{profile.total_games}</p>
                                 <h3 className="text-indigo-800 text-lg font-bold mb-2">Total Sets</h3>
                                 <p className="mb-4">{profile.total_sets}</p>
                                 <h3 className="text-indigo-800 text-lg font-bold mb-2">Average Sets Per Game</h3>
-                                <p className="mb-4">{(profile.total_sets / profile.total_games).toFixed(2)}</p>
+                                <p className="mb-4">{profile.total_games > 0 ? (profile.total_sets / profile.total_games).toFixed(2) : 0}</p>
                             </div>
 
                             {/* <!-- Manage --> */}
@@ -91,7 +93,7 @@ const profileLoader = async ({ params }) => {
     const userDoc = await getDoc(userDocRef);
 
     if (!userDoc.exists()) {
-        throw new Error('Profile not found');
+        throw new Error('profile not found');
     }
 
     return userDoc.data();

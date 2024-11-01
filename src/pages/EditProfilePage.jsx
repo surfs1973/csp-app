@@ -21,7 +21,8 @@ const EditProfilePage = ({ editProfileSubmit }) => {
             location,
             description,
             total_games: profile.total_games,
-            total_sets: profile.total_sets   
+            total_sets: profile.total_sets,
+            total_time: profile.total_time
         }
 
         editProfileSubmit(updateProfile);

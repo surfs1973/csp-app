@@ -7,7 +7,7 @@ import { initCards } from '../utils/CardUtils'
 import GameEndModal from '../components/modals/GameEndModal'
 import NewGameModal from '../components/modals/NewGameModal'
 
-const SetPage = () => {
+const SetPage = ({ profile }) => {
     const [gameState, setGameState] = useState(initCards());
     const [foundSets, setFoundSets] = useState([]);
     const handleFoundSet = (newSet) => {

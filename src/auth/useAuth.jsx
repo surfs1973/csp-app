@@ -57,6 +57,7 @@ const useAuth = () => {
                 description: "The beginnings of your legendary journey",
                 total_games: 0,
                 total_sets: 0,
+                total_time: 0
             };
             await setDoc(userDocRef, userProfileData, { merge: true });
             setProfile(userProfileData);
