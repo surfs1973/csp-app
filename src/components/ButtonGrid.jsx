@@ -85,7 +85,7 @@ const ButtonGrid = ({ deck, firstCards, onFoundSet, setOpenGameEnd }) => {
                             ${activeButtons.includes(card) ? 'ring ring-indigo-200' : ''}`
                         }
                     >
-                        <Shapes color={card.color} shape={card.shape} shading={card.shading} number={card.number} classes="h-12 sm:h-20 md:h-24 lg:h-16 xl:h-20 2xl:h-24" />
+                        <Shapes color={card.color} shape={card.shape} shading={card.shading} number={card.number} classes="h-12 xs:h-10 sm:h-20 md:h-24 lg:h-16 xl:h-20 2xl:h-24" />
                     </button>
                 ))}
             </div>

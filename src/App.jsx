@@ -50,6 +50,10 @@ const App = () => {
         return <Spinner text={"Loading..."} />;
     }
 
+    if (!user || !profile) {
+        return <Spinner text="Loading user data..." />;
+    }
+
     return <RouterProvider router={router} />;
 }
 
