@@ -1,22 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import Spinner from './Spinner';
 
-const ForceGraph = ({ nodes, links }) => {
-    const svgRef = useRef();
-    let simulation; // Declare simulation in a higher scope
+const ForceGraph = ({ nodes, links, classes, width, height, nodeInfo, simSettings }) => {
+    const graphRef = useRef();
+    const [loading, setLoading] = useState(true);
+    let simulation;
 
     useEffect(() => {
-        const svg = d3.select(svgRef.current)
-            .attr('width', 600)
-            .attr('height', 600);
+        const svg = d3.select(graphRef.current)
+            .attr('width', width)
+            .attr('height', height);
 
-        // Create a simulation
         simulation = d3.forceSimulation(nodes)
-            .force('charge', d3.forceManyBody().strength(-200))
-            .force('link', d3.forceLink().id(d => d.id).distance(50))
-            .force("center", d3.forceCenter(200, 200));
+            .force('charge', d3.forceManyBody().strength(simSettings.strength))
+            .force('link', d3.forceLink().id(d => d.id).distance(simSettings.distance))
+            .force("center", d3.forceCenter(width / 2, height / 2))
 
-        // Create links
         const link = svg.selectAll('line.link')
             .data(links)
             .enter()
@@ -25,21 +25,19 @@ const ForceGraph = ({ nodes, links }) => {
             .attr("stroke", "black")
             .style("fill", "none");
 
-        // Create nodes
         const node = svg.selectAll("circle")
             .data(nodes)
             .enter()
             .append("circle")
-            .attr("r", 15)
-            .attr("stroke", "green")
-            .attr("stroke-width", 0.5)
-            .style("fill", "red")
-            .call(d3.drag() // Enable dragging
+            .attr("r", nodeInfo.radius)
+            .attr("stroke", nodeInfo.stroke)
+            .attr("stroke-width", nodeInfo.strokeWidth)
+            .style("fill", nodeInfo.fill)
+            .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
                 .on("end", dragended));
 
-        // Update positions on each tick
         function ticked() {
             link
                 .attr("x1", d => d.source.x)
@@ -50,25 +48,24 @@ const ForceGraph = ({ nodes, links }) => {
             node
                 .attr("cx", d => d.x)
                 .attr("cy", d => d.y);
+
+            setLoading(false);
         }
 
-        // Start simulation
         simulation
             .nodes(nodes)
             .on("tick", ticked);
 
         simulation.force("link").links(links);
 
-        // Cleanup on unmount
         return () => {
             simulation.stop();
-            svg.selectAll("*").remove(); // Remove all elements
+            svg.selectAll("*").remove();
         };
     }, [nodes, links]);
 
-    // Drag event handlers
     function dragstarted(event, d) {
-        if (!event.active) simulation.alphaTarget(0.3).restart(); // Accessing simulation here
+        if (!event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
         d.fy = d.y;
     }
@@ -85,7 +82,10 @@ const ForceGraph = ({ nodes, links }) => {
     }
 
     return (
-        <svg ref={svgRef}></svg>
+        <div>
+            {loading && <Spinner />}
+            <svg ref={graphRef} className={classes}></svg>
+        </div>
     );
 };
 
