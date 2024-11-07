@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import ForceGraph from '../components/ForceGraph';
 import ColorControls from '../components/ColorControls';
 
@@ -16,14 +16,8 @@ const ColorPage = () => {
         { source: 'toyota', target: 'corola' }
     ]
 
-    const simSettings = {
-        strength: -200,
-        distance: 150
-    }
-
     const nodeInfo = {
         radius: 30,
-        stroke: 'black',
         strokeWidth: 0.5,
         fill: 'red'
     }
@@ -36,17 +30,34 @@ const ColorPage = () => {
     // }, []);
 
 
+    const graphContainerRef = useRef(null);
+    const [containerWidth, setContainerWidth] = useState(1000);
+
+    useEffect(() => {
+        if (graphContainerRef.current) {
+            setContainerWidth(graphContainerRef.current.offsetWidth);
+        }
+
+        const handleResize = () => {
+            if (graphContainerRef.current) {
+                setContainerWidth(graphContainerRef.current.offsetWidth);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
-        <div className='grid grid-cols-3 pt-12'>
-            <div className='col-span-2 flex items-center justify-center border border-black'>
+        <div className='grid grid-cols-3 p-6 gap-6'>
+            <div ref={graphContainerRef} className='col-span-2 flex items-center justify-center'>
                 <ForceGraph
                     nodes={nodes}
                     links={links}
-                    classes='border border-black rounded-lg shadow-xl'
-                    width={1000}
+                    classes='rounded-lg shadow-2xl bg-white'
+                    width={containerWidth}
                     height={600}
                     nodeInfo={nodeInfo}
-                    simSettings={simSettings}
                 />
             </div>
             <div className='col-span-1 m-auto'>

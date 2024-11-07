@@ -2,19 +2,21 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import Spinner from './Spinner';
 
-const ForceGraph = ({ nodes, links, classes, width, height, nodeInfo, simSettings }) => {
+const ForceGraph = ({ nodes, links, classes, width, height, nodeInfo }) => {
     const graphRef = useRef();
     const [loading, setLoading] = useState(true);
+    const colors = ["red", "green", "blue", "orange"];
     let simulation;
 
+    // update graph
     useEffect(() => {
         const svg = d3.select(graphRef.current)
             .attr('width', width)
             .attr('height', height);
 
         simulation = d3.forceSimulation(nodes)
-            .force('charge', d3.forceManyBody().strength(simSettings.strength))
-            .force('link', d3.forceLink().id(d => d.id).distance(simSettings.distance))
+            .force('charge', d3.forceManyBody().strength(-(width / 3.5)))
+            .force('link', d3.forceLink().id(d => d.id).distance(width / 6.67))
             .force("center", d3.forceCenter(width / 2, height / 2))
 
         const link = svg.selectAll('line.link')
@@ -30,13 +32,13 @@ const ForceGraph = ({ nodes, links, classes, width, height, nodeInfo, simSetting
             .enter()
             .append("circle")
             .attr("r", nodeInfo.radius)
-            .attr("stroke", nodeInfo.stroke)
             .attr("stroke-width", nodeInfo.strokeWidth)
             .style("fill", nodeInfo.fill)
             .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
-                .on("end", dragended));
+                .on("end", dragended))
+            .on("click", onclick);
 
         function ticked() {
             link
@@ -80,6 +82,15 @@ const ForceGraph = ({ nodes, links, classes, width, height, nodeInfo, simSetting
         d.fx = null;
         d.fy = null;
     }
+
+    function onclick(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        // get color of cur node, find it in colors, then go pos + 1 on it
+        const currentColor = d3.select(this).style("fill");
+        const newColor = colors[(colors.indexOf(currentColor) + 1) % 4]
+        d3.select(this).style("fill", newColor);
+    }
+
 
     return (
         <div>
